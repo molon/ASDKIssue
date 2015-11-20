@@ -21,7 +21,6 @@
         _shareImageNode = [ASImageNode new];
         _shareImageNode.name = @"shareImageNode";
         _shareImageNode.image = [UIImage imageNamed:@"Share"];
-        _shareImageNode.preferredFrameSize = CGSizeMake(28.0f, 28.0f);
         [self addSubnode:_shareImageNode];
     }
     return self;
@@ -32,11 +31,16 @@
     [super layout];
 
 #warning if we call `setNeedsDisplay` for subnode manually. it's `_layer`'s `display` method would be called. Then it will display correctly.
+    
+#warning if not, the subnode won't display
 //    [_shareImageNode setNeedsDisplay];
 }
 
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
     
+    CGSize size = constrainedSize.max;
+    _shareImageNode.sizeRange = ASRelativeSizeRangeMakeWithExactCGSize(size);
+
     return [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_shareImageNode]];
 }
 

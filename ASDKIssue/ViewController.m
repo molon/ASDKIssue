@@ -21,7 +21,6 @@
 {
     [super awakeFromNib];
     _node = [TimelinePopoverNode new];
-    
 }
 
 - (void)viewDidLoad {
@@ -33,7 +32,8 @@
 
 - (IBAction)test:(id)sender {
     
-    CGSize size = [_node measure:self.view.frame.size];
+    CGFloat side = 30+arc4random()%20;
+    CGSize size = [_node measure:CGSizeMake(side,side)];
     _node.frame = (CGRect){50,100,size};
 }
 
