@@ -1,15 +1,16 @@
-/* Copyright (c) 2015-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASCollectionViewFlowLayoutInspector.m
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import <UIKit/UIKit.h>
 
 #import "ASCollectionViewFlowLayoutInspector.h"
-
 #import "ASCollectionView.h"
 #import "ASAssert.h"
 #import "ASEqualityHelpers.h"
@@ -36,7 +37,7 @@
   return self;
 }
 
-- (void)didChangeCollectionViewDelegate:(id<ASCollectionViewDelegate>)delegate;
+- (void)didChangeCollectionViewDelegate:(id<ASCollectionDelegate>)delegate;
 {
   if (delegate == nil) {
     _delegateImplementsReferenceSizeForHeader = NO;
@@ -48,6 +49,12 @@
 }
 
 #pragma mark - ASCollectionViewLayoutInspecting
+
+- (ASSizeRange)collectionView:(ASCollectionView *)collectionView constrainedSizeForNodeAtIndexPath:(NSIndexPath *)indexPath
+{
+  // TODO: Provide constrained size for flow layout item nodes
+  return ASSizeRangeMake(CGSizeZero, CGSizeZero);
+}
 
 - (ASSizeRange)collectionView:(ASCollectionView *)collectionView constrainedSizeForSupplementaryNodeOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
@@ -99,11 +106,7 @@
 - (BOOL)layoutHasSupplementaryViewOfKind:(NSString *)kind inSection:(NSUInteger)section collectionView:(ASCollectionView *)collectionView
 {
   CGSize size = [self sizeForSupplementaryViewOfKind:kind inSection:section collectionView:collectionView];
-  if ([self usedLayoutValueForSize:size] > 0) {
-    return YES;
-  } else {
-    return NO;
-  }
+  return [self usedLayoutValueForSize:size] > 0;
 }
 
 - (CGFloat)usedLayoutValueForSize:(CGSize)size

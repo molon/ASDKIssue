@@ -1,10 +1,12 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASBasicImageDownloader.mm
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import "ASBasicImageDownloader.h"
 
@@ -205,14 +207,14 @@ static const char *kContextKey = NSStringFromClass(ASBasicImageDownloaderContext
   static ASBasicImageDownloader *sharedImageDownloader = nil;
   static dispatch_once_t once = 0;
   dispatch_once(&once, ^{
-    sharedImageDownloader = [[ASBasicImageDownloader alloc] init];
+    sharedImageDownloader = [[ASBasicImageDownloader alloc] _init];
   });
   return sharedImageDownloader;
 }
 
 #pragma mark Lifecycle.
 
-- (instancetype)init
+- (instancetype)_init
 {
   if (!(self = [super init]))
     return nil;
@@ -240,7 +242,7 @@ static const char *kContextKey = NSStringFromClass(ASBasicImageDownloaderContext
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     // associate metadata with it
     NSMutableDictionary *callbackData = [NSMutableDictionary dictionary];
-    callbackData[kASBasicImageDownloaderContextCallbackQueue] = callbackQueue ?: dispatch_get_main_queue();
+    callbackData[kASBasicImageDownloaderContextCallbackQueue] = callbackQueue ? : dispatch_get_main_queue();
 
     if (downloadProgressBlock) {
       callbackData[kASBasicImageDownloaderContextProgressBlock] = [downloadProgressBlock copy];

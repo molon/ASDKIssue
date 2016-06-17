@@ -9,7 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods.xcscheme</key>
+		<key>PINCache.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>PINRemoteImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ASDKIssue.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>26AFE0969BA78157AA42739C19C278FA</key>
+		<key>953AEF2B3A0E698DCBE10C8F5F936151</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CE8C2AF062892CC6EA9A6B47952A971E</key>
+		<key>A3A68466D00794419D73EB730145C222</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EA84A28A5D4CCC272BC475A630C7BA4D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F8942817EB2FFD032F8CDF7F86F839C5</key>
 		<dict>
 			<key>primary</key>
 			<true/>

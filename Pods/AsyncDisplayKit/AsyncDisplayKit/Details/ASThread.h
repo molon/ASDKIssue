@@ -1,10 +1,12 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASThread.h
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #pragma once
 
@@ -194,39 +196,6 @@ namespace ASDN {
 
   typedef Locker<StaticMutex> StaticMutexLocker;
   typedef Unlocker<StaticMutex> StaticMutexUnlocker;
-
-  struct SpinLock
-  {
-    SpinLock &operator= (bool value) {
-      _l = value ? ~0 : 0; return *this;
-    }
-
-    SpinLock() { _l = OS_SPINLOCK_INIT; }
-    SpinLock(const SpinLock&) = delete;
-    SpinLock &operator=(const SpinLock&) = delete;
-
-    bool try_lock () {
-      return OSSpinLockTry (&_l);
-    }
-
-    void lock () {
-      OSSpinLockLock(&_l);
-    }
-
-    void unlock () {
-      OSSpinLockUnlock(&_l);
-    }
-
-    OSSpinLock *spinlock () {
-      return &_l;
-    }
-
-  private:
-    OSSpinLock _l;
-  };
-
-  typedef Locker<SpinLock> SpinLocker;
-  typedef Unlocker<SpinLock> SpinUnlocker;
 
   struct Condition
   {

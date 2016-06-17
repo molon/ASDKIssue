@@ -1,13 +1,14 @@
-/*
- *  Copyright (c) 2014-present, Facebook, Inc.
- *  All rights reserved.
- *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
- *
- */
+//
+//  ASDimension.h
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
+#pragma once
 #import <UIKit/UIKit.h>
 #import <AsyncDisplayKit/ASBaseDefines.h>
 
@@ -34,7 +35,10 @@ typedef struct {
 
 extern ASRelativeDimension const ASRelativeDimensionUnconstrained;
 
+#define isValidForLayout(x) ((isnormal(x) || x == 0.0) && x >= 0.0 && x < (CGFLOAT_MAX / 2.0))
+
 ASDISPLAYNODE_EXTERN_C_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark ASRelativeDimension
 
@@ -57,6 +61,9 @@ extern CGFloat ASRelativeDimensionResolve(ASRelativeDimension dimension, CGFloat
 
 extern ASSizeRange ASSizeRangeMake(CGSize min, CGSize max);
 
+/** Creates an ASSizeRange with the provided size as both min and max */
+extern ASSizeRange ASSizeRangeMakeExactSize(CGSize size);
+
 /** Clamps the provided CGSize between the [min, max] bounds of this ASSizeRange. */
 extern CGSize ASSizeRangeClamp(ASSizeRange sizeRange, CGSize size);
 
@@ -70,4 +77,5 @@ extern BOOL ASSizeRangeEqualToSizeRange(ASSizeRange lhs, ASSizeRange rhs);
 
 extern NSString *NSStringFromASSizeRange(ASSizeRange sizeRange);
 
+NS_ASSUME_NONNULL_END
 ASDISPLAYNODE_EXTERN_C_END

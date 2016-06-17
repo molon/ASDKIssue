@@ -1,12 +1,12 @@
-/*
- *  Copyright (c) 2015-present, Facebook, Inc.
- *  All rights reserved.
- *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
- *
- */
+//
+//  ASRelativeSize.h
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import <UIKit/UIKit.h>
 #import <AsyncDisplayKit/ASBaseDefines.h>
@@ -33,6 +33,7 @@ typedef struct {
 extern ASRelativeSizeRange const ASRelativeSizeRangeUnconstrained;
 
 ASDISPLAYNODE_EXTERN_C_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 #pragma mark ASRelativeSize
@@ -43,7 +44,7 @@ extern ASRelativeSize ASRelativeSizeMake(ASRelativeDimension width, ASRelativeDi
 extern ASRelativeSize ASRelativeSizeMakeWithCGSize(CGSize size);
 
 /** Resolve this relative size relative to a parent size. */
-extern CGSize ASRelativeSizeResolve(ASRelativeSize relativeSize, CGSize parentSize);
+extern CGSize ASRelativeSizeResolveSize(ASRelativeSize relativeSize, CGSize parentSize);
 
 extern BOOL ASRelativeSizeEqualToRelativeSize(ASRelativeSize lhs, ASRelativeSize rhs);
 
@@ -70,4 +71,5 @@ extern BOOL ASRelativeSizeRangeEqualToRelativeSizeRange(ASRelativeSizeRange lhs,
 extern ASSizeRange ASRelativeSizeRangeResolve(ASRelativeSizeRange relativeSizeRange,
                                                        CGSize parentSize);
 
+NS_ASSUME_NONNULL_END
 ASDISPLAYNODE_EXTERN_C_END

@@ -3,11 +3,17 @@
 //  AsyncDisplayKit
 //
 //  Created by Adlai Holler on 9/29/15.
-//  Copyright © 2015 Facebook. All rights reserved.
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
 //
 
 #import <Foundation/Foundation.h>
-#import "ASDataController.h"
+#import <AsyncDisplayKit/ASInternalHelpers.h>
+
+typedef NSUInteger ASDataControllerAnimationOptions;
 
 typedef NS_ENUM(NSInteger, _ASHierarchyChangeType) {
   _ASHierarchyChangeTypeReload,
@@ -29,17 +35,28 @@ typedef NS_ENUM(NSInteger, _ASHierarchyChangeType) {
 
 /// Index paths are sorted descending for changeType .Delete, ascending otherwise
 @property (nonatomic, strong, readonly) NSArray *indexPaths;
+
 @property (nonatomic, readonly) _ASHierarchyChangeType changeType;
+
++ (NSDictionary *)sectionToIndexSetMapFromChanges:(NSArray *)changes ofType:(_ASHierarchyChangeType)changeType;
 @end
 
 @interface _ASHierarchyChangeSet : NSObject
 
+/// @precondition The change set must be completed.
 @property (nonatomic, strong, readonly) NSIndexSet *deletedSections;
+/// @precondition The change set must be completed.
 @property (nonatomic, strong, readonly) NSIndexSet *insertedSections;
+/// @precondition The change set must be completed.
 @property (nonatomic, strong, readonly) NSIndexSet *reloadedSections;
-@property (nonatomic, strong, readonly) NSArray *insertedItems;
-@property (nonatomic, strong, readonly) NSArray *deletedItems;
-@property (nonatomic, strong, readonly) NSArray *reloadedItems;
+
+/**
+ Get the section index after the update for the given section before the update.
+ 
+ @precondition The change set must be completed.
+ @returns The new section index, or NSNotFound if the given section was deleted.
+ */
+- (NSInteger)newSectionForOldSection:(NSInteger)oldSection;
 
 @property (nonatomic, readonly) BOOL completed;
 

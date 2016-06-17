@@ -1,12 +1,18 @@
-/* Copyright (c) 2015-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASDataController+Subclasses.h
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
-#import "ASDataController.h"
+#pragma once
+
+@class ASIndexedNodeContext;
+
+typedef void (^ASDataControllerCompletionBlock)(NSArray<ASCellNode *> *nodes, NSArray<NSIndexPath *> *indexPaths);
 
 @interface ASDataController (Subclasses)
 
@@ -32,15 +38,15 @@
 /**
  * Measure and layout the given nodes in optimized batches, constraining each to a given size in `constrainedSizeForNodeOfKind:atIndexPath:`.
  */
-- (void)batchLayoutNodes:(NSArray *)nodes ofKind:(NSString *)kind atIndexPaths:(NSArray *)indexPaths completion:(void (^)(NSArray *nodes, NSArray *indexPaths))completionBlock;
+- (void)batchLayoutNodesFromContexts:(NSArray<ASIndexedNodeContext *> *)contexts ofKind:(NSString *)kind completion:(ASDataControllerCompletionBlock)completionBlock;
 
-/*
+/**
  * Perform measurement and layout of loaded nodes on the main thread, skipping unloaded nodes.
  *
  * @discussion Once nodes have loaded their views, we can't layout in the background so this is a chance
  * to do so immediately on the main thread.
  */
-- (void)layoutLoadedNodes:(NSArray *)nodes ofKind:(NSString *)kind atIndexPaths:(NSArray *)indexPaths;
+- (void)layoutLoadedNodes:(NSArray<ASCellNode *> *)nodes fromContexts:(NSArray<ASIndexedNodeContext *> *)contexts ofKind:(NSString *)kind;
 
 /**
  * Provides the size range for a specific node during the layout process.
@@ -52,12 +58,12 @@
 /**
  * Inserts the given nodes of the specified kind into the backing store, calling completion on the main thread when the write finishes.
  */
-- (void)insertNodes:(NSArray *)nodes ofKind:(NSString *)kind atIndexPaths:(NSArray *)indexPaths completion:(void (^)(NSArray *nodes, NSArray *indexPaths))completionBlock;
+- (void)insertNodes:(NSArray *)nodes ofKind:(NSString *)kind atIndexPaths:(NSArray *)indexPaths completion:(ASDataControllerCompletionBlock)completionBlock;
 
 /**
  * Deletes the given nodes of the specified kind in the backing store, calling completion on the main thread when the deletion finishes.
  */
-- (void)deleteNodesOfKind:(NSString *)kind atIndexPaths:(NSArray *)indexPaths completion:(void (^)(NSArray *nodes, NSArray *indexPaths))completionBlock;
+- (void)deleteNodesOfKind:(NSString *)kind atIndexPaths:(NSArray *)indexPaths completion:(ASDataControllerCompletionBlock)completionBlock;
 
 /**
  * Inserts the given sections of the specified kind in the backing store, calling completion on the main thread when finished.
@@ -155,5 +161,71 @@
  * @param newSection Index of new section position
  */
 - (void)willMoveSection:(NSInteger)section toSection:(NSInteger)newSection;
+
+/**
+ * Notifies the subclass to perform setup before rows are inserted in the data controller.
+ *
+ * @discussion This method will be performed before the data controller enters its editing queue.
+ * The data source is locked at this point and accessing it is safe. Use this method to set up any nodes or
+ * data stores before entering into editing the backing store on a background thread.
+ *
+ * @param indexPaths Index paths for the rows to be inserted.
+ */
+- (void)prepareForInsertRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
+
+/**
+ * Notifies the subclass that the data controller will insert new rows at the given index paths.
+ *
+ * @discussion This method will be performed on the data controller's editing background queue before the parent's
+ * concrete implementation. This is a great place to perform any additional transformations like supplementary views
+ * or header/footer nodes.
+ *
+ * @param indexPaths Index paths for the rows to be inserted.
+ */
+- (void)willInsertRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
+
+/**
+ * Notifies the subclass to perform setup before rows are deleted in the data controller.
+ *
+ * @discussion This method will be performed before the data controller enters its editing queue.
+ * The data source is locked at this point and accessing it is safe. Use this method to set up any nodes or
+ * data stores before entering into editing the backing store on a background thread.
+ *
+ * @param indexPaths Index paths for the rows to be deleted.
+ */
+- (void)prepareForDeleteRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
+
+/**
+ * Notifies the subclass that the data controller will delete rows at the given index paths.
+ *
+ * @discussion This method will be performed before the data controller enters its editing queue.
+ * The data source is locked at this point and accessing it is safe. Use this method to set up any nodes or
+ * data stores before entering into editing the backing store on a background thread.
+ *
+ * @param indexPaths Index paths for the rows to be deleted.
+ */
+- (void)willDeleteRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
+
+/**
+ * Notifies the subclass to perform any work needed before the given rows will be reloaded.
+ *
+ * @discussion This method will be performed before the data controller enters its editing queue, usually on the main
+ * thread. The data source is locked at this point and accessing it is safe. Use this method to set up any nodes or
+ * data stores before entering into editing the backing store on a background thread.
+ *
+ * @param indexPaths Index paths for the rows to be reloaded.
+ */
+- (void)prepareForReloadRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
+
+/**
+ * Notifies the subclass that the data controller will reload the rows at the given index paths.
+ *
+ * @discussion This method will be performed on the data controller's editing background queue before the parent's
+ * concrete implementation. This is a great place to perform any additional transformations like supplementary views
+ * or header/footer nodes.
+ *
+ * @param indexPaths Index paths for the rows to be reloaded.
+ */
+- (void)willReloadRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
 
 @end
