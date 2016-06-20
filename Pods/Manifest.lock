@@ -14,23 +14,23 @@ PODS:
     - PINRemoteImage/Core
 
 DEPENDENCIES:
-  - AsyncDisplayKit (from `https://github.com/facebook/AsyncDisplayKit.git`, commit `e55037354c0b65a02adb5981052bb59937e19775`)
+  - AsyncDisplayKit (from `https://github.com/maicki/AsyncDisplayKit.git`, commit `127acd411cbdb66639e8bb0a362fef0e65313436`)
 
 EXTERNAL SOURCES:
   AsyncDisplayKit:
-    :commit: e55037354c0b65a02adb5981052bb59937e19775
-    :git: https://github.com/facebook/AsyncDisplayKit.git
+    :commit: 127acd411cbdb66639e8bb0a362fef0e65313436
+    :git: https://github.com/maicki/AsyncDisplayKit.git
 
 CHECKOUT OPTIONS:
   AsyncDisplayKit:
-    :commit: e55037354c0b65a02adb5981052bb59937e19775
-    :git: https://github.com/facebook/AsyncDisplayKit.git
+    :commit: 127acd411cbdb66639e8bb0a362fef0e65313436
+    :git: https://github.com/maicki/AsyncDisplayKit.git
 
 SPEC CHECKSUMS:
   AsyncDisplayKit: ab57b10cd058797015c77be10407f3dc13027c85
   PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
   PINRemoteImage: 197554c5ba57a6ae90f5db441651180039fc9062
 
-PODFILE CHECKSUM: 2afd1746f0fa09638909641691e915b457ce992f
+PODFILE CHECKSUM: 604b2ff3f2d99f57ebbc38e02d8811f824d551b3
 
 COCOAPODS: 1.0.0
