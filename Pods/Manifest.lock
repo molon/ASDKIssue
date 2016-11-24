@@ -1,36 +1,44 @@
 PODS:
-  - AsyncDisplayKit (1.9.80):
-    - AsyncDisplayKit/PINRemoteImage (= 1.9.80)
-  - AsyncDisplayKit/ASDealloc2MainObject (1.9.80)
-  - AsyncDisplayKit/Core (1.9.80):
+  - AsyncDisplayKit (2.0-beta.2):
+    - AsyncDisplayKit/PINRemoteImage (= 2.0-beta.2)
+  - AsyncDisplayKit/ASDealloc2MainObject (2.0-beta.2)
+  - AsyncDisplayKit/Core (2.0-beta.2):
     - AsyncDisplayKit/ASDealloc2MainObject
-  - AsyncDisplayKit/PINRemoteImage (1.9.80):
+  - AsyncDisplayKit/PINRemoteImage (2.0-beta.2):
     - AsyncDisplayKit/Core
-    - PINRemoteImage/iOS (>= 3.0.0-beta.2)
-  - PINCache (2.2.2)
-  - PINRemoteImage/Core (3.0.0-beta.2):
-    - PINCache (>= 2.1)
-  - PINRemoteImage/iOS (3.0.0-beta.2):
+    - PINRemoteImage/iOS (= 3.0.0-beta.6)
+    - PINRemoteImage/PINCache
+  - PINCache (3.0.1-beta.2):
+    - PINCache/Arc-exception-safe (= 3.0.1-beta.2)
+    - PINCache/Core (= 3.0.1-beta.2)
+  - PINCache/Arc-exception-safe (3.0.1-beta.2):
+    - PINCache/Core
+  - PINCache/Core (3.0.1-beta.2)
+  - PINRemoteImage/Core (3.0.0-beta.6)
+  - PINRemoteImage/iOS (3.0.0-beta.6):
+    - PINRemoteImage/Core
+  - PINRemoteImage/PINCache (3.0.0-beta.6):
+    - PINCache (= 3.0.1-beta.2)
     - PINRemoteImage/Core
 
 DEPENDENCIES:
-  - AsyncDisplayKit (from `https://github.com/maicki/AsyncDisplayKit.git`, commit `127acd411cbdb66639e8bb0a362fef0e65313436`)
+  - AsyncDisplayKit (from `https://github.com/maicki/AsyncDisplayKit.git`, commit `aefff563bdfa2b482e403a5a99e0efd8ed887362`)
 
 EXTERNAL SOURCES:
   AsyncDisplayKit:
-    :commit: 127acd411cbdb66639e8bb0a362fef0e65313436
+    :commit: aefff563bdfa2b482e403a5a99e0efd8ed887362
     :git: https://github.com/maicki/AsyncDisplayKit.git
 
 CHECKOUT OPTIONS:
   AsyncDisplayKit:
-    :commit: 127acd411cbdb66639e8bb0a362fef0e65313436
+    :commit: aefff563bdfa2b482e403a5a99e0efd8ed887362
     :git: https://github.com/maicki/AsyncDisplayKit.git
 
 SPEC CHECKSUMS:
-  AsyncDisplayKit: ab57b10cd058797015c77be10407f3dc13027c85
-  PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
-  PINRemoteImage: 197554c5ba57a6ae90f5db441651180039fc9062
+  AsyncDisplayKit: 1e82c2896ba0400da61607f8bacf026a081a0646
+  PINCache: 6d273a6e0754bd26e3f12a38a90dde73cc6a42b2
+  PINRemoteImage: 60156f185c9360ca4e93832cd490d6f6c7afbd9a
 
-PODFILE CHECKSUM: 604b2ff3f2d99f57ebbc38e02d8811f824d551b3
+PODFILE CHECKSUM: 17e83e59bfbe2502684afcf50a66219f4b4d2938
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.1.1

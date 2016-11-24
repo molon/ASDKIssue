@@ -2,5 +2,5 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, ‘7.0’
 
 target 'ASDKIssue' do
-	pod 'AsyncDisplayKit', :git => 'https://github.com/maicki/AsyncDisplayKit.git', :commit => '127acd411cbdb66639e8bb0a362fef0e65313436'
+	pod 'AsyncDisplayKit', :git => 'https://github.com/maicki/AsyncDisplayKit.git', :commit => 'aefff563bdfa2b482e403a5a99e0efd8ed887362'
 end
